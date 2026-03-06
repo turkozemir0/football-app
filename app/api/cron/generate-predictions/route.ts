@@ -91,14 +91,28 @@ export async function GET(request: NextRequest) {
     }
 
     if (updates.length > 0) {
-      const { error: updateError } = await supabase.from('fixtures').upsert(updates, { onConflict: 'id' });
-      if (updateError) throw updateError;
+      for (const update of updates) {
+        const { error: updateError } = await supabase
+          .from('fixtures')
+          .update({ ai_prediction: update.ai_prediction, updated_at: update.updated_at })
+          .eq('id', update.id);
+
+        if (updateError) throw new Error(JSON.stringify(updateError));
+      }
     }
 
     return NextResponse.json({ ok: true, processed: updates.length, preview });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to generate predictions', details: error instanceof Error ? error.message : String(error) },
+      {
+        error: 'Failed to generate predictions',
+        details:
+          error instanceof Error
+            ? error.message
+            : typeof error === 'object' && error !== null
+              ? JSON.stringify(error)
+              : String(error)
+      },
       { status: 500 }
     );
   }
