@@ -1,0 +1,11 @@
+{
+  "common": {
+    "appName": "KickoffAI",
+    "tagline": "AI-Powered Football Intelligence",
+    "premium": "Premium",
+    "free": "Free",
+    "upgrade": "Upgrade to Premium",
+    "login": "Sign In",
+    "register": "Sign Up"
+  }
+}

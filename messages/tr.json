@@ -1,0 +1,11 @@
+{
+  "common": {
+    "appName": "KickoffAI",
+    "tagline": "Yapay Zeka Destekli Futbol Analizi",
+    "premium": "Premium",
+    "free": "Ücretsiz",
+    "upgrade": "Premium'a Geç",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol"
+  }
+}
