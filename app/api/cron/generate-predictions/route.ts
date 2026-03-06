@@ -42,9 +42,12 @@ export async function GET(request: NextRequest) {
   }
 
   const now = new Date();
-  const horizonHours = Number(request.nextUrl.searchParams.get('horizonHours') ?? 48);
-  const horizon = Number.isFinite(horizonHours) && horizonHours > 0 ? horizonHours : 48;
+  const defaultHorizon = Number(process.env.PREDICTION_HORIZON_HOURS ?? 24);
+  const horizonHours = Number(request.nextUrl.searchParams.get('horizonHours') ?? defaultHorizon);
+  const horizon =
+    Number.isFinite(horizonHours) && horizonHours > 0 ? Math.min(Math.max(horizonHours, 1), 72) : defaultHorizon;
   const until = new Date(now.getTime() + horizon * 60 * 60 * 1000).toISOString();
+  const processingLimit = Math.min(500, Math.max(100, Math.ceil(horizon * 20)));
 
   try {
     const { data, error } = await supabase
@@ -54,9 +57,9 @@ export async function GET(request: NextRequest) {
       )
       .gte('date', now.toISOString())
       .lte('date', until)
-      .in('status_short', ['NS', 'TBD'])
+      .in('status_short', ['NS', 'TBD', 'PST'])
       .order('date', { ascending: true })
-      .limit(200);
+      .limit(processingLimit);
 
     if (error) throw error;
 
