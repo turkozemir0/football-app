@@ -1,9 +1,11 @@
 import { getRequestConfig } from 'next-intl/server';
 import { APP_LOCALES, DEFAULT_LOCALE } from '@/lib/constants';
 
-export default getRequestConfig(async ({ locale }) => {
+export default getRequestConfig(async ({ requestLocale }) => {
+  const locale = await requestLocale;
+
   const normalizedLocale = APP_LOCALES.includes((locale ?? DEFAULT_LOCALE) as (typeof APP_LOCALES)[number])
-    ? (locale as (typeof APP_LOCALES)[number])
+    ? ((locale ?? DEFAULT_LOCALE) as (typeof APP_LOCALES)[number])
     : DEFAULT_LOCALE;
 
   return {

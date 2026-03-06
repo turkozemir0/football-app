@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getFixturesByDate } from '@/lib/api-football';
-import { supabaseAdmin } from '@/lib/supabase/admin';
+import { getSupabaseAdmin } from '@/lib/supabase/admin';
 import { FixtureSummary } from '@/types';
 
 function normalizeFixture(raw: any): FixtureSummary {
@@ -31,12 +31,15 @@ export async function GET(request: NextRequest) {
   const date = request.nextUrl.searchParams.get('date') ?? new Date().toISOString().slice(0, 10);
 
   try {
-    const { data: cached } = await supabaseAdmin
-      .from('fixtures')
-      .select('id,date,status_short,home_team_id,away_team_id,home_goals,away_goals,leagues(id,name),home:teams!fixtures_home_team_id_fkey(id,name),away:teams!fixtures_away_team_id_fkey(id,name)')
-      .gte('date', `${date}T00:00:00.000Z`)
-      .lte('date', `${date}T23:59:59.999Z`)
-      .limit(100);
+    const supabaseAdmin = getSupabaseAdmin();
+    const { data: cached } = supabaseAdmin
+      ? await supabaseAdmin
+          .from('fixtures')
+          .select('id,date,status_short,home_team_id,away_team_id,home_goals,away_goals,leagues(id,name),home:teams!fixtures_home_team_id_fkey(id,name),away:teams!fixtures_away_team_id_fkey(id,name)')
+          .gte('date', `${date}T00:00:00.000Z`)
+          .lte('date', `${date}T23:59:59.999Z`)
+          .limit(100)
+      : { data: null };
 
     if (cached && cached.length > 0) {
       const fixtures: FixtureSummary[] = cached.map((item: any) => ({
@@ -67,7 +70,7 @@ export async function GET(request: NextRequest) {
     const apiFixtures = await getFixturesByDate(date);
     const fixtures = apiFixtures.map(normalizeFixture);
 
-    return NextResponse.json({ source: 'api', fixtures });
+    return NextResponse.json({ source: supabaseAdmin ? 'api' : 'api_no_cache', fixtures });
   } catch (error) {
     return NextResponse.json(
       {

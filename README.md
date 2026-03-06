@@ -18,6 +18,20 @@ npm install
 npm run dev
 ```
 
+## Environment Setup
+1. Copy `.env.example` to `.env.local`.
+2. Fill these required values:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `API_FOOTBALL_KEY`
+3. Keep `NEXT_PUBLIC_APP_URL=http://localhost:3000` for local development.
+
+## Supabase Setup
+1. Open your Supabase project SQL Editor.
+2. Run [supabase/schema.sql](./supabase/schema.sql) once.
+3. Verify tables were created: `leagues`, `teams`, `fixtures`.
+
 ## Notes
-- Set `NEXT_PUBLIC_APP_URL` for server-side page fetches to API routes.
-- `API_FOOTBALL_KEY` and Supabase credentials are required for live data.
+- The fixtures route uses cache-first behavior when Supabase env vars exist.
+- If Supabase env vars are missing, the app falls back to API-only mode.

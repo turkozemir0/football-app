@@ -5,16 +5,20 @@ async function getTodaysFixtures(): Promise<FixtureSummary[]> {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
   const date = new Date().toISOString().slice(0, 10);
 
-  const response = await fetch(`${appUrl}/api/football/fixtures?date=${date}`, {
-    next: { revalidate: 120 }
-  });
+  try {
+    const response = await fetch(`${appUrl}/api/football/fixtures?date=${date}`, {
+      next: { revalidate: 120 }
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return [];
+    }
+
+    const data = (await response.json()) as { fixtures?: FixtureSummary[] };
+    return data.fixtures ?? [];
+  } catch {
     return [];
   }
-
-  const data = (await response.json()) as { fixtures?: FixtureSummary[] };
-  return data.fixtures ?? [];
 }
 
 export default async function MatchesPage() {
