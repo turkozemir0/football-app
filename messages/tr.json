@@ -7,5 +7,20 @@
     "upgrade": "Premium'a Geç",
     "login": "Giriş Yap",
     "register": "Kayıt Ol"
+  },
+  "nav": {
+    "matches": "Maçlar",
+    "predictions": "Tahminler",
+    "leagues": "Ligler",
+    "analysis": "Analizler"
+  },
+  "home": {
+    "title": "Yapay Zeka Destekli Futbol Analizi",
+    "description": "KickoffAI, istatistikleri, AI analizi ve şeffaf tahmin doğruluğunu tek platformda birleştirir."
+  },
+  "prediction": {
+    "aiPrediction": "AI Tahmin",
+    "confidence": "Güven",
+    "unlockAll": "Sınırsız tahmin aç"
   }
 }

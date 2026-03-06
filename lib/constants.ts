@@ -12,3 +12,8 @@ export const FEATURED_LEAGUES = {
 } as const;
 
 export const CURRENT_SEASON = 2025;
+
+export const APP_LOCALES = ['en', 'tr'] as const;
+export type AppLocale = (typeof APP_LOCALES)[number];
+
+export const DEFAULT_LOCALE: AppLocale = 'en';

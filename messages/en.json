@@ -7,5 +7,20 @@
     "upgrade": "Upgrade to Premium",
     "login": "Sign In",
     "register": "Sign Up"
+  },
+  "nav": {
+    "matches": "Matches",
+    "predictions": "Predictions",
+    "leagues": "Leagues",
+    "analysis": "Analysis"
+  },
+  "home": {
+    "title": "AI-Powered Football Intelligence",
+    "description": "KickoffAI combines stats, AI analysis, and transparent prediction accuracy in one platform."
+  },
+  "prediction": {
+    "aiPrediction": "AI Prediction",
+    "confidence": "Confidence",
+    "unlockAll": "Unlock unlimited predictions"
   }
 }

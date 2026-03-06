@@ -1,8 +1,12 @@
+import { useTranslations } from 'next-intl';
+
 export default function HomePage() {
+  const t = useTranslations('home');
+
   return (
     <section className="space-y-4">
-      <h1 className="text-4xl font-bold">AI-Powered Football Intelligence</h1>
-      <p className="text-slate-300">KickoffAI combines stats, AI analysis, and transparent prediction accuracy in one platform.</p>
+      <h1 className="text-4xl font-bold">{t('title')}</h1>
+      <p className="text-slate-300">{t('description')}</p>
     </section>
   );
 }
