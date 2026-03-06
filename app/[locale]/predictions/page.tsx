@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
-import { PremiumGate } from '@/components/prediction/PremiumGate';
+import { cookies } from 'next/headers';
 import { PredictionCard } from '@/components/prediction/PredictionCard';
+import { SubscriptionGate } from '@/components/prediction/SubscriptionGate';
 import { getSupabaseAdmin } from '@/lib/supabase/admin';
 
 interface PredictionPayload {
@@ -89,6 +90,8 @@ export default async function PredictionsPage({
   searchParams?: Promise<SearchParams>;
 }) {
   const t = await getTranslations('prediction');
+  const cookieStore = await cookies();
+  const initialIsPremium = cookieStore.get('kickoff_subscription')?.value === 'premium';
   const filters = (await searchParams) ?? {};
   const selectedDate = validDateInput(filters.date);
   const selectedLeagueId = filters.league ? Number(filters.league) : null;
@@ -175,7 +178,7 @@ export default async function PredictionsPage({
           ))}
 
           {premiumTier.length > 0 && (
-            <PremiumGate isPremium={false}>
+            <SubscriptionGate initialIsPremium={initialIsPremium}>
               <div className="space-y-4">
                 {premiumTier.map((prediction) => (
                   <div key={prediction.id} className="space-y-1">
@@ -184,7 +187,7 @@ export default async function PredictionsPage({
                   </div>
                 ))}
               </div>
-            </PremiumGate>
+            </SubscriptionGate>
           )}
         </>
       )}
