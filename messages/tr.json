@@ -1,26 +1,32 @@
-{
+﻿{
   "common": {
     "appName": "KickoffAI",
     "tagline": "Yapay Zeka Destekli Futbol Analizi",
     "premium": "Premium",
-    "free": "Ücretsiz",
-    "upgrade": "Premium'a Geç",
-    "login": "Giriş Yap",
-    "register": "Kayıt Ol"
+    "free": "Ucretsiz",
+    "upgrade": "Premium'a Gec",
+    "login": "Giris Yap",
+    "register": "Kayit Ol"
   },
   "nav": {
-    "matches": "Maçlar",
+    "matches": "Maclar",
     "predictions": "Tahminler",
     "leagues": "Ligler",
     "analysis": "Analizler"
   },
   "home": {
     "title": "Yapay Zeka Destekli Futbol Analizi",
-    "description": "KickoffAI, istatistikleri, AI analizi ve şeffaf tahmin doğruluğunu tek platformda birleştirir."
+    "description": "KickoffAI, istatistikleri, AI analizi ve seffaf tahmin dogrulugunu tek platformda birlestirir."
   },
   "prediction": {
     "aiPrediction": "AI Tahmin",
-    "confidence": "Güven",
-    "unlockAll": "Sınırsız tahmin aç"
+    "confidence": "Guven",
+    "unlockAll": "Sinirsiz tahmin ac",
+    "filterDate": "Tarih",
+    "filterLeague": "Lig",
+    "allLeagues": "Tum ligler",
+    "applyFilters": "Uygula",
+    "resetFilters": "Sifirla",
+    "noPredictions": "Bu filtre icin tahmin bulunamadi."
   }
 }

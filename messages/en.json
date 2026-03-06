@@ -21,6 +21,12 @@
   "prediction": {
     "aiPrediction": "AI Prediction",
     "confidence": "Confidence",
-    "unlockAll": "Unlock unlimited predictions"
+    "unlockAll": "Unlock unlimited predictions",
+    "filterDate": "Date",
+    "filterLeague": "League",
+    "allLeagues": "All leagues",
+    "applyFilters": "Apply",
+    "resetFilters": "Reset",
+    "noPredictions": "No predictions found for this filter."
   }
 }
