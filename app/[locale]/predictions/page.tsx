@@ -4,6 +4,8 @@ import { PredictionCard } from '@/components/prediction/PredictionCard';
 import { SubscriptionGate } from '@/components/prediction/SubscriptionGate';
 import { getSupabaseAdmin } from '@/lib/supabase/admin';
 
+export const dynamic = 'force-dynamic';
+
 interface PredictionPayload {
   homeWinProb: number;
   drawProb: number;

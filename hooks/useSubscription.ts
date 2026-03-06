@@ -23,8 +23,18 @@ export function useSubscription(initialIsPremium = false) {
     };
 
     load();
+
+    const onFocus = () => {
+      load();
+    };
+
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onFocus);
+
     return () => {
       active = false;
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onFocus);
     };
   }, []);
 

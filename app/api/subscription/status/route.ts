@@ -8,5 +8,12 @@ export async function GET() {
   const plan = cookieStore.get(SUBSCRIPTION_COOKIE)?.value ?? 'free';
   const isPremium = plan === 'premium';
 
-  return NextResponse.json({ isPremium, plan });
+  return NextResponse.json(
+    { isPremium, plan },
+    {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate'
+      }
+    }
+  );
 }
